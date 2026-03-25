@@ -988,6 +988,127 @@ body {
   letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim);
 }
 
+/* ══ LEGS SUB-TABS ══ */
+.legs-sub-tabs {
+  display: flex; gap: 8px; margin-bottom: 16px;
+}
+.legs-stab {
+  flex: 1; padding: 10px 8px; text-align: center;
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-dim);
+  cursor: pointer; transition: all 0.15s; user-select: none;
+}
+.legs-stab:active { opacity: 0.7; }
+.legs-stab.active { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.legs-sub-pane { display: none; }
+.legs-sub-pane.active { display: block; }
+
+/* ══ PUSH-UPS TRACKER ══ */
+.pu-strip-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 8px;
+}
+.pu-day-strip {
+  display: flex; gap: 5px; overflow-x: auto;
+  padding-bottom: 6px; margin-bottom: 20px; scrollbar-width: none;
+}
+.pu-day-strip::-webkit-scrollbar { display: none; }
+.pu-day-pill {
+  flex-shrink: 0; width: 40px; height: 40px; border-radius: 8px;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 1px; font-family: var(--mono);
+  background: var(--surface); border: 1px solid var(--border);
+  color: var(--text-dim); cursor: pointer; transition: all 0.12s;
+  user-select: none; position: relative;
+}
+.pu-day-pill.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+.pu-day-pill.done { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.pu-day-pill.done::after {
+  content: "✓"; position: absolute; bottom: 2px; right: 3px;
+  font-size: 7px; color: rgba(255,255,255,0.75);
+}
+.pu-pill-num { font-size: 13px; font-weight: 600; line-height: 1; }
+.pu-pill-date { font-size: 7px; opacity: 0.75; }
+.pu-wheel-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; padding: 24px 20px 22px;
+  display: flex; flex-direction: column; align-items: center; margin-bottom: 14px;
+}
+.pu-wheel-eyebrow {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 20px; align-self: flex-start;
+}
+.pu-ring-wrap {
+  position: relative; width: 210px; height: 210px;
+  margin-bottom: 22px; touch-action: none; cursor: pointer;
+}
+.pu-ring-svg { width: 210px; height: 210px; transform: rotate(-90deg); overflow: visible; }
+.pu-ring-bg { fill: none; stroke: var(--surface3); stroke-width: 18; }
+.pu-ring-track {
+  fill: none; stroke-width: 18; stroke-linecap: round; stroke: var(--gold);
+  stroke-dasharray: 565.5; stroke-dashoffset: 565.5;
+  transition: stroke-dashoffset 0.12s ease, stroke 0.25s;
+}
+.pu-ring-track.done { stroke: var(--accent2); }
+.pu-handle {
+  position: absolute; width: 30px; height: 30px;
+  background: var(--gold); border: 3px solid var(--bg); border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6); transform: translate(-50%,-50%);
+  top: 50%; left: 50%; transition: background 0.25s; pointer-events: none;
+}
+.pu-handle.done { background: var(--accent2); }
+.pu-ring-center {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  text-align: center; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center;
+}
+.pu-big-num {
+  font-family: var(--disp); font-size: 78px; letter-spacing: 1px;
+  line-height: 1; color: var(--text); transition: color 0.25s;
+}
+.pu-big-num.done { color: var(--accent2); }
+.pu-of-100 { font-family: var(--mono); font-size: 11px; color: var(--text-dim); letter-spacing: 2px; margin-top: 2px; }
+.pu-step-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-dim); align-self: flex-start; margin-bottom: 8px;
+}
+.pu-step-row { display: flex; gap: 8px; width: 100%; margin-bottom: 18px; }
+.pu-step-btn {
+  flex: 1; padding: 9px 4px; text-align: center;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-dim);
+  cursor: pointer; transition: all 0.12s; user-select: none;
+}
+.pu-step-btn.active { background: var(--gold); border-color: var(--gold); color: #fff; }
+.pu-step-btn:active { opacity: 0.75; }
+.pu-arrow-row { display: flex; gap: 16px; width: 100%; }
+.pu-btn {
+  flex: 1; height: 58px; border-radius: 14px; border: none;
+  font-size: 28px; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  user-select: none; -webkit-tap-highlight-color: transparent; transition: all 0.1s;
+}
+.pu-btn:active { transform: scale(0.93); }
+.pu-btn-minus { background: var(--surface2); color: var(--text-mid); border: 1px solid var(--border); }
+.pu-btn-plus { background: var(--gold); color: #fff; }
+.pu-btn-plus.done { background: var(--accent2); }
+.pu-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.pu-stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 8px; text-align: center;
+}
+.pu-stat-n { font-family: var(--disp); font-size: 30px; letter-spacing: 1px; color: var(--text); line-height: 1; }
+.pu-stat-l {
+  font-family: var(--mono); font-size: 8px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px;
+}
+
 </style>
 </head>
 <body>
@@ -1048,16 +1169,21 @@ body {
       <div class="page-sub">All gym sessions in one place. Legs 1 is Tuesday, Push Wednesday, Pull Thursday, Legs 2 Saturday.</div>
     </div>
     <div class="gym-tabs">
-      <div class="gym-tab legs active" onclick="switchGymTab('legs',this)">Legs 1</div>
+      <div class="gym-tab legs active" onclick="switchGymTab('legs',this)">Legs</div>
       <div class="gym-tab push" onclick="switchGymTab('push',this)">Push</div>
       <div class="gym-tab pull" onclick="switchGymTab('pull',this)">Pull</div>
-      <div class="gym-tab legs2" onclick="switchGymTab('legs2',this)">Legs 2</div>
       <div class="gym-tab pushups" onclick="switchGymTab('pushups',this)">Push-ups</div>
     </div>
-    <div class="gym-pane active" id="gym-pane-legs"><div id="legs-content"></div></div>
+    <div class="gym-pane active" id="gym-pane-legs">
+      <div class="legs-sub-tabs">
+        <div class="legs-stab active" onclick="switchLegsTab('legs1',this)">Legs 1 — Tuesday</div>
+        <div class="legs-stab" onclick="switchLegsTab('legs2',this)">Legs 2 — Saturday</div>
+      </div>
+      <div class="legs-sub-pane active" id="legs-sub-legs1"><div id="legs-content"></div></div>
+      <div class="legs-sub-pane" id="legs-sub-legs2"><div id="legs2-content"></div></div>
+    </div>
     <div class="gym-pane" id="gym-pane-push"><div id="push-content"></div></div>
     <div class="gym-pane" id="gym-pane-pull"><div id="pull-content"></div></div>
-    <div class="gym-pane" id="gym-pane-legs2"><div id="legs2-content"></div></div>
     <div class="gym-pane" id="gym-pane-pushups"><div id="pushups-content"></div></div>
   </div>
 </div>
@@ -2346,6 +2472,232 @@ function renderNotes() {
     </div>`).join('');
 }
 
+
+// ═══════════════════════════════════════════
+// LEGS SUB-TABS
+// ═══════════════════════════════════════════
+function switchLegsTab(tab, el) {
+  document.querySelectorAll('.legs-stab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.querySelectorAll('.legs-sub-pane').forEach(p => p.classList.remove('active'));
+  const pane = document.getElementById('legs-sub-' + tab);
+  if (pane) pane.classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ═══════════════════════════════════════════
+// PUSH-UPS TRACKER
+// ═══════════════════════════════════════════
+const PU_START = new Date(2026, 2, 23); // Mon 23 Mar 2026
+const PU_CIRC = 565.5;
+const PU_R = 90;
+const PU_CX = 105;
+const PU_CY = 105;
+
+function puKey(d) { return 'ogemaxx_pu_' + d; }
+function puGet(d) { return Math.min(100, Math.max(0, parseInt(localStorage.getItem(puKey(d)) || '0'))); }
+function puSet(d, v) { localStorage.setItem(puKey(d), String(Math.min(100, Math.max(0, v)))); }
+
+function puTodayIndex() {
+  const now = new Date(); now.setHours(0,0,0,0);
+  const diff = Math.floor((now - PU_START) / 86400000);
+  return Math.max(0, Math.min(69, diff));
+}
+
+let puActiveDay = puTodayIndex();
+let puStep = 10;
+
+function buildPushups() {
+  const c = document.getElementById('pushups-content');
+  if (!c) return;
+
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun'];
+  let strip = '<div class="pu-strip-label">Select Day</div><div class="pu-day-strip" id="puStrip">';
+  for (let d = 0; d < 70; d++) {
+    const dt = new Date(PU_START);
+    dt.setDate(PU_START.getDate() + d);
+    const count = puGet(d);
+    const cls = d === puActiveDay ? 'active' : count >= 100 ? 'done' : '';
+    strip += '<div class="pu-day-pill ' + cls + '" id="pu-pill-' + d + '" onclick="puSelectDay(' + d + ')">'
+      + '<div class="pu-pill-num">' + (d+1) + '</div>'
+      + '<div class="pu-pill-date">' + dt.getDate() + ' ' + MONTHS[dt.getMonth()] + '</div>'
+      + '</div>';
+  }
+  strip += '</div>';
+
+  c.innerHTML = strip
+    + '<div class="pu-wheel-card">'
+    + '<div class="pu-wheel-eyebrow">Day <span id="puDayNum">' + (puActiveDay+1) + '</span> of 70 &mdash; Daily Push-ups</div>'
+    + '<div class="pu-ring-wrap" id="puRingWrap">'
+    + '<svg class="pu-ring-svg" viewBox="0 0 210 210">'
+    + '<circle class="pu-ring-bg" cx="' + PU_CX + '" cy="' + PU_CY + '" r="' + PU_R + '"/>'
+    + '<circle class="pu-ring-track" id="puTrack" cx="' + PU_CX + '" cy="' + PU_CY + '" r="' + PU_R + '"'
+    + ' stroke-dasharray="' + PU_CIRC + '" stroke-dashoffset="' + PU_CIRC + '"/>'
+    + '</svg>'
+    + '<div class="pu-handle" id="puHandle"></div>'
+    + '<div class="pu-ring-center">'
+    + '<div class="pu-big-num" id="puBigNum">0</div>'
+    + '<div class="pu-of-100">/ 100</div>'
+    + '</div></div>'
+    + '<div class="pu-step-label">Step Size</div>'
+    + '<div class="pu-step-row">'
+    + '<div class="pu-step-btn" onclick="puSetStep(1,this)">+1</div>'
+    + '<div class="pu-step-btn" onclick="puSetStep(5,this)">+5</div>'
+    + '<div class="pu-step-btn active" onclick="puSetStep(10,this)">+10</div>'
+    + '<div class="pu-step-btn" onclick="puSetStep(25,this)">+25</div>'
+    + '</div>'
+    + '<div class="pu-arrow-row">'
+    + '<button class="pu-btn pu-btn-minus" onclick="puStepCount(-1)">&minus;</button>'
+    + '<button class="pu-btn pu-btn-plus" id="puPlusBtn" onclick="puStepCount(1)">+</button>'
+    + '</div></div>'
+    + '<div class="pu-stats">'
+    + '<div class="pu-stat"><div class="pu-stat-n" id="puStatStreak">0</div><div class="pu-stat-l">Streak</div></div>'
+    + '<div class="pu-stat"><div class="pu-stat-n" id="puStatDone">0</div><div class="pu-stat-l">Days Done</div></div>'
+    + '<div class="pu-stat"><div class="pu-stat-n" id="puStatTotal">0</div><div class="pu-stat-l">Total Reps</div></div>'
+    + '</div>';
+
+  puRefreshDisplay(puActiveDay);
+  puRefreshStats();
+  puInitDrag();
+
+  setTimeout(function() {
+    var pill = document.getElementById('pu-pill-' + puActiveDay);
+    if (pill) pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  }, 80);
+}
+
+function puSelectDay(d) {
+  var oldPill = document.getElementById('pu-pill-' + puActiveDay);
+  if (oldPill) {
+    oldPill.className = 'pu-day-pill' + (puGet(puActiveDay) >= 100 ? ' done' : '');
+  }
+  puActiveDay = d;
+  var newPill = document.getElementById('pu-pill-' + d);
+  if (newPill) newPill.className = 'pu-day-pill active' + (puGet(d) >= 100 ? ' done' : '');
+  document.getElementById('puDayNum').textContent = d + 1;
+  puRefreshDisplay(d);
+}
+
+function puRefreshDisplay(d) {
+  var count = puGet(d);
+  var pct = count / 100;
+  var done = count >= 100;
+  var offset = PU_CIRC * (1 - pct);
+
+  var numEl = document.getElementById('puBigNum');
+  if (numEl) { numEl.textContent = count; numEl.classList.toggle('done', done); }
+
+  var track = document.getElementById('puTrack');
+  if (track) { track.style.strokeDashoffset = offset; track.classList.toggle('done', done); }
+
+  var handle = document.getElementById('puHandle');
+  if (handle) {
+    var angle = pct * 2 * Math.PI - Math.PI / 2;
+    var hx = PU_CX + PU_R * Math.cos(angle);
+    var hy = PU_CY + PU_R * Math.sin(angle);
+    handle.style.left = (hx / 210 * 100) + '%';
+    handle.style.top = (hy / 210 * 100) + '%';
+    handle.classList.toggle('done', done);
+  }
+
+  var plusBtn = document.getElementById('puPlusBtn');
+  if (plusBtn) plusBtn.classList.toggle('done', done);
+}
+
+function puStepCount(dir) {
+  puSet(puActiveDay, puGet(puActiveDay) + dir * puStep);
+  puRefreshDisplay(puActiveDay);
+  puRefreshStats();
+  var pill = document.getElementById('pu-pill-' + puActiveDay);
+  if (pill) pill.className = 'pu-day-pill active' + (puGet(puActiveDay) >= 100 ? ' done' : '');
+}
+
+function puSetStep(s, el) {
+  puStep = s;
+  document.querySelectorAll('.pu-step-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function puRefreshStats() {
+  var total = 0, done = 0, streak = 0;
+  var today = puTodayIndex();
+  for (var d = today; d >= 0; d--) {
+    if (puGet(d) >= 100) streak++; else break;
+  }
+  for (var d = 0; d < 70; d++) {
+    var c = puGet(d); total += c;
+    if (c >= 100) done++;
+  }
+  var se = document.getElementById('puStatStreak');
+  var de = document.getElementById('puStatDone');
+  var te = document.getElementById('puStatTotal');
+  if (se) se.textContent = streak;
+  if (de) de.textContent = done;
+  if (te) te.textContent = total >= 1000 ? (total / 1000).toFixed(1) + 'k' : total;
+}
+
+function puInitDrag() {
+  var wrap = document.getElementById('puRingWrap');
+  if (!wrap) return;
+  var dragging = false;
+
+  function getAngle(e) {
+    var rect = wrap.getBoundingClientRect();
+    var scale = rect.width / 210;
+    var cx = PU_CX * scale + rect.left;
+    var cy = PU_CY * scale + rect.top;
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    var angle = Math.atan2(clientY - cy, clientX - cx) * 180 / Math.PI + 90;
+    if (angle < 0) angle += 360;
+    return angle;
+  }
+
+  function getDist(e) {
+    var rect = wrap.getBoundingClientRect();
+    var scale = rect.width / 210;
+    var cx = PU_CX * scale + rect.left;
+    var cy = PU_CY * scale + rect.top;
+    var clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    var clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return Math.sqrt(Math.pow(clientX - cx, 2) + Math.pow(clientY - cy, 2)) / scale;
+  }
+
+  wrap.addEventListener('mousedown', function(e) {
+    var d = getDist(e);
+    if (d > PU_R - 24 && d < PU_R + 24) { dragging = true; e.preventDefault(); }
+  });
+  wrap.addEventListener('touchstart', function(e) {
+    var d = getDist(e);
+    if (d > PU_R - 30 && d < PU_R + 30) { dragging = true; e.preventDefault(); }
+  }, { passive: false });
+
+  document.addEventListener('mousemove', function(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    var newCount = Math.round((getAngle(e) / 360) * 100);
+    puSet(puActiveDay, newCount);
+    puRefreshDisplay(puActiveDay);
+  });
+  document.addEventListener('touchmove', function(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    var newCount = Math.round((getAngle(e) / 360) * 100);
+    puSet(puActiveDay, newCount);
+    puRefreshDisplay(puActiveDay);
+  }, { passive: false });
+
+  function onEnd() {
+    if (!dragging) return;
+    dragging = false;
+    puRefreshStats();
+    var pill = document.getElementById('pu-pill-' + puActiveDay);
+    if (pill) pill.className = 'pu-day-pill active' + (puGet(puActiveDay) >= 100 ? ' done' : '');
+  }
+  document.addEventListener('mouseup', onEnd);
+  document.addEventListener('touchend', onEnd);
+}
+
 // ═══════════════════════════════════════════
 // INIT — must be last, after all functions declared
 // ═══════════════════════════════════════════
@@ -2358,6 +2710,7 @@ buildSwimPage();
 buildCalendar();
 renderNotes();
 buildTimerPage();
+buildPushups();
 </script>
 </body>
 </html>
