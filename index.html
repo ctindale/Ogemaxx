@@ -1112,30 +1112,7 @@ body {
 }
 
 /* ══ TIMER EXTRAS ══ */
-.timer-notif-bar {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 10px; padding: 12px 14px;
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 12px; margin-bottom: 16px;
-}
-.timer-notif-info { flex: 1; min-width: 0; }
-.timer-notif-title {
-  font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px;
-}
-.timer-notif-sub {
-  font-family: var(--mono); font-size: 10px; color: var(--text-dim); line-height: 1.4;
-}
-.timer-notif-btn {
-  background: var(--accent4); color: #fff; border: none;
-  border-radius: 8px; padding: 8px 14px;
-  font-family: var(--mono); font-size: 11px; font-weight: 500;
-  letter-spacing: 1px; text-transform: uppercase;
-  cursor: pointer; white-space: nowrap; flex-shrink: 0;
-  transition: opacity 0.12s;
-}
-.timer-notif-btn:active { opacity: 0.75; }
-.timer-notif-btn.granted { background: var(--accent2); }
-.timer-notif-btn.denied { background: var(--border2); color: var(--text-dim); cursor: default; }
+
 .timer-wake-row {
   display: flex; align-items: center; justify-content: space-between;
   background: var(--surface2); border: 1px solid var(--border);
@@ -2252,7 +2229,7 @@ function buildSessionPage(pageId, sessions, guideData) {
             <div class="sess-block-title">Session ${sess.n}</div>
           </div>
         </div>
-        <div class="warmup-row"><strong>Warm-up</strong>Cat-Cow · Shoulder Dislocates · Thread the Needle · Cobra → Child's Pose · Glute Bridge · Figure-4 Stretch · Ankle Mobility</div>
+        <div class="warmup-row"><strong>Warm-up</strong>Cat-Cow · Shoulder Dislocates · Thread the Needle · Cobra → Child's Pose · Glute Bridge · Figure-4 Stretch · Ankle</div>
         <div class="ex-card">
           ${sess.ex.map(ex => {
             const k = gk(pageId, sess.n, ex.num);
@@ -2581,88 +2558,14 @@ document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible' && wakeActive) requestWakeLock();
 });
 
-// ── Notifications ──
-let notifPermission = 'default';
 
-async function requestNotifPermission() {
-  if (!('Notification' in window)) {
-    updateNotifUI('unsupported'); return;
-  }
-  if (Notification.permission === 'granted') {
-    notifPermission = 'granted'; updateNotifUI('granted'); return;
-  }
-  const result = await Notification.requestPermission();
-  notifPermission = result;
-  updateNotifUI(result);
-}
-
-function updateNotifUI(state) {
-  const btn = document.getElementById('notifBtn');
-  const sub = document.getElementById('notifSub');
-  if (!btn || !sub) return;
-  if (state === 'granted') {
-    btn.textContent = 'Enabled ✓';
-    btn.className = 'timer-notif-btn granted';
-    sub.textContent = 'You will get a notification when each timer finishes';
-  } else if (state === 'denied') {
-    btn.textContent = 'Blocked';
-    btn.className = 'timer-notif-btn denied';
-    sub.textContent = 'Enable notifications in iPhone Settings → Safari → Notifications';
-  } else if (state === 'unsupported') {
-    btn.textContent = 'Not supported';
-    btn.className = 'timer-notif-btn denied';
-    sub.textContent = 'Add to Home Screen first, then enable notifications';
-  } else {
-    btn.textContent = 'Enable';
-    btn.className = 'timer-notif-btn';
-    sub.textContent = 'Tap to allow notifications when a timer finishes';
-  }
-}
-
-function scheduleNotif(label, seconds) {
-  if (notifPermission !== 'granted') return;
-  // Use setTimeout mapped to notification — fires even if screen dims briefly
-  // but iOS will block if truly backgrounded; this is best-effort
-  setTimeout(() => {
-    try {
-      new Notification('OgeMaxx Timer', {
-        body: label + ' — time is up!',
-        icon: '',
-        tag: 'ogemaxx-timer',
-        renotify: true,
-        silent: false,
-      });
-    } catch(e) {}
-  }, seconds * 1000);
-}
 
 // ── Build Page ──
 function buildTimerPage() {
   const c = document.getElementById('timer-content');
   if (!c) return;
 
-  // Check existing notification permission
-  if ('Notification' in window) notifPermission = Notification.permission;
-  const notifGranted = notifPermission === 'granted';
-  const notifDenied  = notifPermission === 'denied';
 
-  const notifBarHtml = `
-    <div class="timer-notif-bar">
-      <div class="timer-notif-info">
-        <div class="timer-notif-title">Finish notifications</div>
-        <div class="timer-notif-sub" id="notifSub">${
-          notifGranted ? 'You will get a notification when each timer finishes'
-          : notifDenied ? 'Enable in iPhone Settings → Safari → Notifications'
-          : 'Tap to allow notifications when a timer finishes'
-        }</div>
-      </div>
-      <button class="timer-notif-btn ${notifGranted?'granted':notifDenied?'denied':''}"
-        id="notifBtn"
-        onclick="${notifDenied ? '' : 'requestNotifPermission()'}"
-        ${notifDenied ? 'disabled' : ''}>
-        ${notifGranted ? 'Enabled ✓' : notifDenied ? 'Blocked' : 'Enable'}
-      </button>
-    </div>`;
 
   const wakeBarHtml = `
     <div class="timer-wake-row">
@@ -2676,7 +2579,7 @@ function buildTimerPage() {
     </div>`;
 
   const timersHtml = TIMER_CONFIGS.map(t => {
-    timerState[t.id] = { interval: null, remaining: t.duration, running: false, notifTimeout: null };
+    timerState[t.id] = { interval: null, remaining: t.duration, running: false };
     return `<div class="timer-block ${t.cls}" id="block-${t.id}">
       <div class="timer-label">${t.sub}</div>
       <div class="timer-display" id="disp-${t.id}">${formatTime(t.duration)}</div>
@@ -2686,14 +2589,14 @@ function buildTimerPage() {
       </div>
       <div class="timer-btns">
         <button class="timer-btn timer-btn-play" id="play-${t.id}"
-          onclick="timerToggle('${t.id}',${t.duration},'${t.label}')">▶ Play</button>
+          onclick="timerToggle('${t.id}',${t.duration})">▶ Play</button>
         <button class="timer-btn timer-btn-reset"
           onclick="timerReset('${t.id}',${t.duration})">↺ Reset</button>
       </div>
     </div>`;
   }).join('');
 
-  c.innerHTML = notifBarHtml + wakeBarHtml + timersHtml;
+  c.innerHTML = wakeBarHtml + timersHtml;
 }
 
 function formatTime(secs) {
@@ -2702,7 +2605,7 @@ function formatTime(secs) {
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
-function timerToggle(id, total, label) {
+function timerToggle(id, total) {
   const state = timerState[id];
   const playBtn = document.getElementById('play-'+id);
   const disp = document.getElementById('disp-'+id);
@@ -2714,7 +2617,6 @@ function timerToggle(id, total, label) {
     playBtn.textContent = '▶ Play';
     playBtn.classList.remove('playing');
     disp.classList.remove('running');
-    if (state.notifTimeout) { clearTimeout(state.notifTimeout); state.notifTimeout = null; }
   } else {
     if (state.remaining <= 0) timerReset(id, total);
 
@@ -2727,19 +2629,7 @@ function timerToggle(id, total, label) {
     disp.classList.add('running');
     disp.classList.remove('finished');
 
-    // Schedule notification for when timer should end
-    if (notifPermission === 'granted') {
-      if (state.notifTimeout) clearTimeout(state.notifTimeout);
-      state.notifTimeout = setTimeout(() => {
-        try {
-          new Notification('OgeMaxx — ' + label, {
-            body: 'Timer done! Next set.',
-            tag: 'ogemaxx-' + id,
-            renotify: true,
-          });
-        } catch(e) {}
-      }, state.remaining * 1000);
-    }
+
 
     // Use drift-corrected tick
     function tick() {
@@ -2771,7 +2661,6 @@ function timerToggle(id, total, label) {
 function timerReset(id, total) {
   const state = timerState[id];
   clearInterval(state.interval);
-  if (state.notifTimeout) { clearTimeout(state.notifTimeout); state.notifTimeout = null; }
   state.running = false;
   state.remaining = total;
   const playBtn = document.getElementById('play-'+id);
