@@ -703,6 +703,7 @@ body {
   position: absolute; top: 0; left: 0; right: 0;
   height: 3px; border-radius: 18px 18px 0 0;
 }
+.timer-block.tmr-30::before { background: #9b59b6; }
 .timer-block.tmr-1::before { background: var(--accent2); }
 .timer-block.tmr-3::before { background: var(--accent3); }
 .timer-block.tmr-5::before { background: var(--accent); }
@@ -740,6 +741,7 @@ body {
   transition: width 0.95s linear;
   width: 100%;
 }
+.tmr-30 .timer-progress-fill { background: #9b59b6; }
 .tmr-1 .timer-progress-fill { background: var(--accent2); }
 .tmr-3 .timer-progress-fill { background: var(--accent3); }
 .tmr-5 .timer-progress-fill { background: var(--accent); }
@@ -1109,6 +1111,57 @@ body {
   letter-spacing: 1px; text-transform: uppercase; color: var(--text-dim); margin-top: 4px;
 }
 
+/* ══ TIMER EXTRAS ══ */
+.timer-notif-bar {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 16px;
+}
+.timer-notif-info { flex: 1; min-width: 0; }
+.timer-notif-title {
+  font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px;
+}
+.timer-notif-sub {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim); line-height: 1.4;
+}
+.timer-notif-btn {
+  background: var(--accent4); color: #fff; border: none;
+  border-radius: 8px; padding: 8px 14px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  cursor: pointer; white-space: nowrap; flex-shrink: 0;
+  transition: opacity 0.12s;
+}
+.timer-notif-btn:active { opacity: 0.75; }
+.timer-notif-btn.granted { background: var(--accent2); }
+.timer-notif-btn.denied { background: var(--border2); color: var(--text-dim); cursor: default; }
+.timer-wake-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; gap: 12px;
+}
+.timer-wake-info { flex: 1; }
+.timer-wake-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.timer-wake-sub { font-family: var(--mono); font-size: 10px; color: var(--text-dim); }
+.timer-toggle-wrap { flex-shrink: 0; }
+.timer-toggle {
+  position: relative; width: 44px; height: 26px;
+  background: var(--border2); border-radius: 13px;
+  cursor: pointer; transition: background 0.2s;
+  border: none; display: block;
+}
+.timer-toggle.on { background: var(--accent2); }
+.timer-toggle::after {
+  content: ''; position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  background: #fff; border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.timer-toggle.on::after { transform: translateX(18px); }
+
 </style>
 </head>
 <body>
@@ -1300,7 +1353,7 @@ const SESS_DEFS=[
   {id:'swimA',label:'Monday — Yoga + Swim Technique',detail:'Yoga into long spine, kick drills',badge:'b-swim',bl:'Swim A'},
   {id:'legs1',label:'Tuesday — Legs 1',detail:'Squat · Lunge · Step-up · RDL · Core',badge:'b-legs',bl:'Legs 1'},
   {id:'push',label:'Wednesday — Push',detail:'Incline press · Cable press · Shoulder press',badge:'b-push',bl:'Push'},
-  {id:'pull',label:'Thursday — Pull',detail:'Rows · Lat pulldown · Carries',badge:'b-pull',bl:'Pull'},
+  {id:'pull',label:'Thursday — Pull',detail:'Pull-ups · Rows · Carries',badge:'b-pull',bl:'Pull'},
   {id:'swimB1',label:'Friday — Swim Endurance',detail:'Continuous freestyle, build distance',badge:'b-swim',bl:'Swim B'},
   {id:'legs2',label:'Saturday — Legs 2',detail:'Split squat · Step-up · Hack squat · Carries',badge:'b-legs',bl:'Legs 2'},
   {id:'walk',label:'Sunday — Long Walk',detail:'Loaded walk, progressive pack weight',badge:'b-walk',bl:'Walk'},
@@ -1407,56 +1460,56 @@ const PUSH=[
 // ═══════════════════════════════════════════
 const PULL=[
   {n:1,phase:'Phase 1',pc:'p1',days:'Day 1–7',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
-    {num:'5',name:'Pallof press hold',sets:'3 × 20 sec each side'},
+    {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side'},
     {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side'},
-    {num:'7',name:'Hammer curl',sets:'3 × 10'},
+    {num:'7',name:'Hammer curl',sets:'4 × 8'},
   ]},
   {n:2,phase:'Phase 1',pc:'p1',days:'Day 8–14',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
-    {num:'5',name:'Pallof press hold',sets:'3 × 20 sec each side'},
+    {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side'},
     {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side'},
-    {num:'7',name:'Hammer curl',sets:'3 × 10'},
+    {num:'7',name:'Hammer curl',sets:'4 × 8'},
   ]},
   {n:3,phase:'Phase 2',pc:'p2',days:'Day 15–21',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
-    {num:'5',name:'Pallof press hold',sets:'3 × 20–30 sec each side'},
+    {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side'},
     {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side'},
     {num:'7',name:'Farmer carry',sets:'3 × 30 m'},
-    {num:'8',name:'Hammer curl',sets:'3 × 10'},
+    {num:'8',name:'Hammer curl',sets:'4 × 8'},
   ]},
   {n:4,phase:'Phase 2',pc:'p2',days:'Day 22–28',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side'},
     {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side'},
     {num:'7',name:'Farmer carry',sets:'3 × 30 m'},
-    {num:'8',name:'Hammer curl',sets:'3 × 10'},
+    {num:'8',name:'Hammer curl',sets:'4 × 8'},
   ]},
   {n:5,phase:'Phase 2',pc:'p2',days:'Day 29–35',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side'},
     {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side'},
     {num:'7',name:'Farmer carry',sets:'3 × 30 m'},
-    {num:'8',name:'Hammer curl',sets:'3 × 10'},
+    {num:'8',name:'Hammer curl',sets:'4 × 8'},
   ]},
   {n:6,phase:'Phase 3',pc:'p3',days:'Day 36–42',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Cable chop — high to low',sets:'3 × 8 each side'},
@@ -1464,8 +1517,8 @@ const PULL=[
     {num:'7',name:'Farmer carry',sets:'3 × 40 m'},
   ]},
   {n:7,phase:'Phase 3',pc:'p3',days:'Day 43–49',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Cable chop — high to low',sets:'3 × 8 each side'},
@@ -1473,8 +1526,8 @@ const PULL=[
     {num:'7',name:'Farmer carry',sets:'3 × 40 m'},
   ]},
   {n:8,phase:'Phase 3',pc:'p3',days:'Day 50–56',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Cable chop — high to low',sets:'3 × 8 each side'},
@@ -1482,8 +1535,8 @@ const PULL=[
     {num:'7',name:'Farmer carry',sets:'3 × 40 m'},
   ]},
   {n:9,phase:'Phase 4',pc:'p4',days:'Day 57–63',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Cable chop — high to low',sets:'3 × 8 each side'},
@@ -1491,8 +1544,8 @@ const PULL=[
     {num:'7',name:'Farmer carry (heavier)',sets:'3 × 40 m'},
   ]},
   {n:10,phase:'Phase 4',pc:'p4',days:'Day 64–70',ex:[
-    {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12'},
-    {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10'},
+    {num:'1',name:'Pull-up',sets:'3 × 8'},
+    {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12'},
     {num:'3',name:'Half-kneeling single-arm cable row',sets:'3 × 10 each side'},
     {num:'4',name:'Face pull',sets:'3 × 12'},
     {num:'5',name:'Cable chop — high to low',sets:'3 × 8 each side'},
@@ -1801,13 +1854,17 @@ const GUIDES = {
 
   pull:[
     {phase:'Phase 1',sub:'Days 1–14 · Sessions 1–2',pc:'p1',
-    why:'The pull sessions introduce three things from day one that are not standard gym work: anti-rotation holds, unilateral carries, and chest-supported rowing. The chest-supported row removes your lower back from the equation entirely — you cannot cheat by leaning back, which means your lats and rhomboids have to do the work they are supposed to do. The half-kneeling cable row mirrors the push: one knee down, same pattern, same anti-rotation demand. The Pallof press hold is spine stability training disguised as a standing exercise — 20 seconds of resisting a cable trying to rotate you is more core work than most people do in an entire session. The suitcase carry is the most direct hiking-specific exercise in the entire program. One hand loaded, walk tall, and prevent the load from pulling you sideways — that is what your spine does all day under a pack on uneven ground.',
+    why:'Pull-ups come first in every pull session — you are doing 3 × 8 of these already, which means your lats are strong enough to benefit from leading with them while completely fresh. The swimming you are doing provides continuous lat work in a horizontal pulling arc across every session, which makes the lat pulldown machine largely redundant — pull-ups demand more from the shoulder girdle, require full-body tension, and are more specific to the overhead stability needed with a loaded pack. The chest-supported row follows the pull-up and removes your lower back from the equation entirely — lats and rhomboids do the work without any temptation to cheat with a back swing. The Pallof press hold at 30 seconds each side is the core anchor of the session. The suitcase carry is the most direct hiking-specific exercise in the program — one hand loaded, walk tall, resist the load pulling you sideways — that is what your spine does all day under a pack on uneven ground.',
     exs:[
-      {num:'1',name:'Chest-supported single-arm low row',sets:'2 × 12',
+      {num:'1',name:'Pull-up',sets:'3 × 8',
+      cue:'Start from a dead hang — hands just outside shoulder width, overhand grip. Before you pull, depress your shoulder blades: think of pulling your shoulders away from your ears without bending your arms. This engages your lats before your biceps take over and sets the correct pulling pattern. Now pull until your chin is clearly over the bar — not your forehead, your chin. At the top, hold for one second and feel your shoulder blades pulled together. The descent is everything: take 3 full seconds to lower back to a dead hang. Three seconds. Not one, not two — three. This eccentric is where you are building lat and rhomboid strength. If you cannot do 8 clean reps with a 3-second descent, use a band under one or both knees. The band reduces the load on the way up and lets you focus on the eccentric on the way down. In Phase 1 and 2, aim for 3 × 8 with a band if needed. From Phase 3 onward, work toward unassisted.',
+      prog:'Progress by reducing band assistance across phases. From 3 × 8 with band → 3 × 8 half-band → 3 × 8 unassisted. Once unassisted, add a 3 × 9 and build to 3 × 10 before adding load.'},
+
+      {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12',
       cue:'Adjust the chest pad height so that when you lean into it, your upper chest is resting comfortably and your working arm can move freely below you. Select a weight that allows a full range — elbow driving back past your hip, shoulder blade squeezing at the end of each rep. Do not rush the setup. Before each rep, let your arm hang fully — this ensures you are starting from a stretched lat position. Drive the elbow back and down, not just back. At the end of each rep, hold the squeeze for a full second before lowering. The return is 2–3 seconds — slow and controlled, feeling the lat lengthen. The chest pad prevents any temptation to use your lower back. If you find yourself pushing away from the pad, reduce the weight.',
       prog:'Add load when 12 reps on both sides feel like 5 out of 10 effort with full range and a clear squeeze at the end of each rep.'},
 
-      {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10',
+      {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12',
       cue:'Lat pulldown: grip the bar just outside shoulder width — not a very wide grip, which limits range, and not close-grip, which shifts to biceps. Sit with your thighs locked under the pad. Lean back very slightly — about 10–15 degrees — and pull the bar to your upper chest, not your chin or your neck. Your elbows should be travelling down and slightly back, finishing just below and slightly in front of your shoulders. The 3-second eccentric on the way up is critical: let the bar rise slowly while you resist it, feeling your lats lengthen the entire way. Do not let the weight stack touch between reps. Pull-up: start from a dead hang with your shoulders in their sockets — not shrugged up to your ears. Initiate the pull by depressing your shoulder blades (think: pull your shoulders away from your ears before you bend your arms). Pull until your chin is clearly over the bar. Lower for 3 full seconds. Use a band under one or both knees if needed — the 3-second eccentric matters more than the number of reps.',
       prog:'Add load or reduce band assistance when 3 × 10 is completed with full range, a clear squeeze at the top, and a 3-second eccentric on every single rep.'},
 
@@ -1819,17 +1876,17 @@ const GUIDES = {
       cue:'Attach a rope to a cable at eye height — exactly eye height, not above or below. Grip the rope with both hands, palms facing each other. Take a step back until there is tension in the cable. Stand tall, core braced. Pull the rope toward your forehead, separating the two ends of the rope as you do — your hands should finish on either side of your head with your thumbs pointing behind you. Hold this end position for 2 seconds — this is the position of full external rotation and it is exactly where the exercise does its work for your rotator cuff. Return slowly. This exercise should be kept light throughout all phases. If you are straining or using momentum, the weight is too heavy. This is shoulder health work — treat it with the same care as your physio exercises.',
       prog:'Keep light throughout all phases. The value is in the range of motion and the end position, not the load.'},
 
-      {num:'5',name:'Pallof press hold',sets:'3 × 20 sec each side',
-      cue:'Set a cable or attach a band to an anchor at chest height. Stand sideways to the anchor with your feet shoulder-width apart. Hold the cable handle at your sternum with both hands. Brace your core and press both hands straight out from your chest — straight out, not angled. Hold this position for the full 20 seconds. The cable is pulling you toward the anchor — your core and hips resist this continuously for the entire hold. Your hips and shoulders must remain square throughout. Do not let your near shoulder drift toward the anchor. Do not let your hips rotate. Breathe normally — holding your breath for 20 seconds is not sustainable. When you can hold 20 seconds with no drift and normal breathing, progress toward 30 seconds.',
-      prog:'Work toward 30 seconds per side with zero body rotation and normal breathing before Phase 2.'},
+      {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side',
+      cue:'Set a cable or attach a band to an anchor at chest height. Stand sideways to the anchor with your feet shoulder-width apart. Hold the cable handle at your sternum with both hands. Brace your core and press both hands straight out from your chest — straight out, not angled. Hold this extended position for the full 30 seconds. The cable is constantly pulling you toward the anchor — your core and hips resist this for the entire duration. Your hips and shoulders must remain square throughout. Do not let your near shoulder drift toward the anchor. Do not let your hips rotate. Breathe normally — slow and steady. 30 seconds of resisting a cable with normal breathing and zero drift is harder than it sounds. If you cannot hit 30 seconds with good position, work from 20 and add 2–3 seconds each session.',
+      prog:'Hold 30 seconds with zero body rotation and normal breathing on all 3 sets across all phases. If position deteriorates before 30 seconds, reduce resistance rather than reduce time.'},
 
       {num:'6',name:'Suitcase carry',sets:'4 × 30 m each side',
       cue:'Pick up a dumbbell or kettlebell in one hand. Before you take a single step, get tall — fully upright, shoulders level, eyes forward. Now walk. The load is constantly trying to pull you sideways and collapse your shoulder on the loaded side. Your job is to prevent this completely — your shoulders stay level, your hips stay level, your torso stays upright. Do not lean away from the load (this is compensating), do not lean into the load (this is also compensating). Walk with your normal stride, not a shortened shuffle. 30 metres is not a short carry — by the end you will feel your core, your hip stabilisers, and your trap on the loaded side working. If technique breaks before 30m, the load is too heavy. Complete all 4 sets on one side before switching.',
       prog:'Increase load when 30m is completed with level shoulders, level hips, and an upright torso on all 4 sets.'},
 
-      {num:'7',name:'Hammer curl',sets:'3 × 10',
-      cue:'Stand with dumbbells at your sides, palms facing each other — this neutral grip targets the brachialis, which sits under the bicep and adds thickness to the upper arm. Pin your elbows to your sides before the first rep and keep them there throughout the set — not drifting forward, not swinging back. Curl one arm at a time or alternate. Slow eccentric — take 2–3 seconds to lower each rep fully. Do not let your wrists roll. At the top, hold the contraction for a moment before lowering.',
-      prog:'Add 2kg when 10 reps is clean on both sides with pinned elbows and a 2-second eccentric.'},
+      {num:'7',name:'Hammer curl',sets:'4 × 8',
+      cue:'Stand with dumbbells at your sides, palms facing each other — this neutral grip targets the brachialis, which sits under the bicep and adds thickness to the upper arm. Pin your elbows to your sides before the first rep and keep them there throughout all 4 sets — not drifting forward, not swinging back. Alternate arms. Slow eccentric — take 2–3 seconds to lower each rep fully. Do not let your wrists roll or your shoulder come forward to initiate the curl. At the top, hold the contraction for a full second before lowering.',
+      prog:'Add 2kg when 4 × 8 is clean on both arms with pinned elbows, 1-second hold at top, and 2-second eccentric.'},
     ]},
 
     {phase:'Phase 2',sub:'Days 15–35 · Sessions 3–5',pc:'p2',
@@ -1839,7 +1896,7 @@ const GUIDES = {
       cue:'Same technique as Phase 1. Increase load while maintaining the same standards: full range, 1-second squeeze at the top of each rep, 2–3 second eccentric. At heavier loads you may feel a stronger temptation to jerk the weight up. Resist this — initiate each rep from a full hang and pull smoothly.',
       prog:'Continued load progression with the same technique standards.'},
 
-      {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10',
+      {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12',
       cue:'Same as Phase 1. Increase load or reduce band assistance. The 3-second eccentric remains non-negotiable — this is where you are building lat strength, not in the concentric pull.',
       prog:'Add load or reduce band when 3 × 10 is clean with full range and 3-second eccentric.'},
 
@@ -1851,7 +1908,7 @@ const GUIDES = {
       cue:'Same as Phase 1. Keep light. The range of motion and the end position are the point, not the load. The face pull should never feel like a maximum effort exercise.',
       prog:'Unchanged — keep light throughout all phases.'},
 
-      {num:'5',name:'Pallof press hold',sets:'3 × 20–30 sec each side',
+      {num:'5',name:'Pallof press hold',sets:'3 × 30 sec each side',
       cue:'Same as Phase 1. If 20 seconds feels very comfortable with normal breathing and zero drift, add a small amount of resistance and work toward 30 seconds. The progression check: you should be able to breathe normally and hold a conversation at 20 seconds. If you cannot breathe normally, the resistance is too high.',
       prog:'Progress toward 30 seconds with increased resistance. Achieve 30 seconds cleanly before Phase 3.'},
 
@@ -1863,7 +1920,7 @@ const GUIDES = {
       cue:'Both hands loaded with equal weight. This is bilateral loaded postural endurance — the most direct gym simulation of walking under a pack. Before you take a step, get tall. Shoulders back and down — not shrugged up. Core braced. Now walk with a normal stride. Do not let the load pull your shoulders forward into a rounded position. Do not let your lower back drift into extension. Your posture should look identical whether you are carrying the weights or not. 30 metres is a genuine carry — you will feel it by the end. Keep the load at a level that allows you to maintain perfect posture for the entire 30m. Rest 90 seconds between sets.',
       prog:'Start at a challenging but manageable load. Increase when 30m feels like 6 out of 10 effort with perfect posture throughout.'},
 
-      {num:'8',name:'Hammer curl',sets:'3 × 10',
+      {num:'8',name:'Hammer curl',sets:'4 × 8',
       cue:'Same as Phase 1. Increase load. Elbows pinned, 2-second eccentric, no swing.',
       prog:'Add 2kg when 10 reps is clean on both sides.'},
     ]},
@@ -1875,7 +1932,7 @@ const GUIDES = {
       cue:'Same technique. Continue load progression. Full range, 1-second squeeze, 2-second eccentric.',
       prog:'Continued progression.'},
 
-      {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10',
+      {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12',
       cue:'Same technique. Continue load progression. 3-second eccentric every rep.',
       prog:'Continued progression.'},
 
@@ -1907,7 +1964,7 @@ const GUIDES = {
       cue:'Same technique across all phases. Maintain or increase Phase 3 load. Full range, squeeze, slow eccentric.',
       prog:'Continued progression.'},
 
-      {num:'2',name:'Lat pulldown or pull-up',sets:'3 × 10',
+      {num:'2',name:'Chest-supported single-arm low row',sets:'2 × 12',
       cue:'Same technique. Maintain or increase Phase 3 load.',
       prog:'Continued progression.'},
 
@@ -2474,34 +2531,169 @@ function updateSwimRange(input) {
 // ═══════════════════════════════════════════
 // TIMERS
 // ═══════════════════════════════════════════
+// ═══════════════════════════════════════════
+// TIMERS — with Wake Lock + Notifications
+// ═══════════════════════════════════════════
 const TIMER_CONFIGS = [
-  { id:'tmr1',  duration:60,   label:'1 Minute',  sub:'Quick rest / warm-up set', cls:'tmr-1'  },
-  { id:'tmr3',  duration:180,  label:'3 Minutes', sub:'Standard rest between sets', cls:'tmr-3'  },
-  { id:'tmr5',  duration:300,  label:'5 Minutes', sub:'Extended rest / activation', cls:'tmr-5'  },
-  { id:'tmr15', duration:900,  label:'15 Minutes',sub:'Full warm-up routine', cls:'tmr-15' },
+  { id:'tmr30', duration:30,  label:'30 Seconds', sub:'Short burst / quick set',  cls:'tmr-30' },
+  { id:'tmr1',  duration:60,  label:'1 Minute',   sub:'Quick rest / warm-up set', cls:'tmr-1'  },
+  { id:'tmr3',  duration:180, label:'3 Minutes',  sub:'Standard rest between sets', cls:'tmr-3' },
+  { id:'tmr5',  duration:300, label:'5 Minutes',  sub:'Extended rest / activation', cls:'tmr-5' },
+  { id:'tmr15', duration:900, label:'15 Minutes', sub:'Full warm-up routine',      cls:'tmr-15' },
 ];
 
 const timerState = {};
+let wakeLock = null;
+let wakeActive = false;
 
+// ── Wake Lock ──
+async function requestWakeLock() {
+  if (!('wakeLock' in navigator)) return false;
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    wakeLock.addEventListener('release', () => { wakeActive = false; updateWakeToggleUI(); });
+    wakeActive = true;
+    updateWakeToggleUI();
+    return true;
+  } catch(e) { return false; }
+}
+
+async function releaseWakeLock() {
+  if (wakeLock) { try { await wakeLock.release(); } catch(e) {} wakeLock = null; }
+  wakeActive = false;
+  updateWakeToggleUI();
+}
+
+function toggleWakeLock() {
+  if (wakeActive) releaseWakeLock();
+  else requestWakeLock();
+}
+
+function updateWakeToggleUI() {
+  const btn = document.getElementById('wakeToggle');
+  if (btn) btn.classList.toggle('on', wakeActive);
+  const sub = document.getElementById('wakeSub');
+  if (sub) sub.textContent = wakeActive ? 'Screen will stay on while timers run' : 'Screen may turn off between sets';
+}
+
+// Re-acquire wake lock if page becomes visible again (iOS releases on hide)
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible' && wakeActive) requestWakeLock();
+});
+
+// ── Notifications ──
+let notifPermission = 'default';
+
+async function requestNotifPermission() {
+  if (!('Notification' in window)) {
+    updateNotifUI('unsupported'); return;
+  }
+  if (Notification.permission === 'granted') {
+    notifPermission = 'granted'; updateNotifUI('granted'); return;
+  }
+  const result = await Notification.requestPermission();
+  notifPermission = result;
+  updateNotifUI(result);
+}
+
+function updateNotifUI(state) {
+  const btn = document.getElementById('notifBtn');
+  const sub = document.getElementById('notifSub');
+  if (!btn || !sub) return;
+  if (state === 'granted') {
+    btn.textContent = 'Enabled ✓';
+    btn.className = 'timer-notif-btn granted';
+    sub.textContent = 'You will get a notification when each timer finishes';
+  } else if (state === 'denied') {
+    btn.textContent = 'Blocked';
+    btn.className = 'timer-notif-btn denied';
+    sub.textContent = 'Enable notifications in iPhone Settings → Safari → Notifications';
+  } else if (state === 'unsupported') {
+    btn.textContent = 'Not supported';
+    btn.className = 'timer-notif-btn denied';
+    sub.textContent = 'Add to Home Screen first, then enable notifications';
+  } else {
+    btn.textContent = 'Enable';
+    btn.className = 'timer-notif-btn';
+    sub.textContent = 'Tap to allow notifications when a timer finishes';
+  }
+}
+
+function scheduleNotif(label, seconds) {
+  if (notifPermission !== 'granted') return;
+  // Use setTimeout mapped to notification — fires even if screen dims briefly
+  // but iOS will block if truly backgrounded; this is best-effort
+  setTimeout(() => {
+    try {
+      new Notification('OgeMaxx Timer', {
+        body: label + ' — time is up!',
+        icon: '',
+        tag: 'ogemaxx-timer',
+        renotify: true,
+        silent: false,
+      });
+    } catch(e) {}
+  }, seconds * 1000);
+}
+
+// ── Build Page ──
 function buildTimerPage() {
   const c = document.getElementById('timer-content');
   if (!c) return;
 
-  c.innerHTML = TIMER_CONFIGS.map(t => {
-    timerState[t.id] = { interval: null, remaining: t.duration, running: false };
+  // Check existing notification permission
+  if ('Notification' in window) notifPermission = Notification.permission;
+  const notifGranted = notifPermission === 'granted';
+  const notifDenied  = notifPermission === 'denied';
+
+  const notifBarHtml = `
+    <div class="timer-notif-bar">
+      <div class="timer-notif-info">
+        <div class="timer-notif-title">Finish notifications</div>
+        <div class="timer-notif-sub" id="notifSub">${
+          notifGranted ? 'You will get a notification when each timer finishes'
+          : notifDenied ? 'Enable in iPhone Settings → Safari → Notifications'
+          : 'Tap to allow notifications when a timer finishes'
+        }</div>
+      </div>
+      <button class="timer-notif-btn ${notifGranted?'granted':notifDenied?'denied':''}"
+        id="notifBtn"
+        onclick="${notifDenied ? '' : 'requestNotifPermission()'}"
+        ${notifDenied ? 'disabled' : ''}>
+        ${notifGranted ? 'Enabled ✓' : notifDenied ? 'Blocked' : 'Enable'}
+      </button>
+    </div>`;
+
+  const wakeBarHtml = `
+    <div class="timer-wake-row">
+      <div class="timer-wake-info">
+        <div class="timer-wake-title">Keep screen awake</div>
+        <div class="timer-wake-sub" id="wakeSub">Screen may turn off between sets</div>
+      </div>
+      <div class="timer-toggle-wrap">
+        <button class="timer-toggle" id="wakeToggle" onclick="toggleWakeLock()"></button>
+      </div>
+    </div>`;
+
+  const timersHtml = TIMER_CONFIGS.map(t => {
+    timerState[t.id] = { interval: null, remaining: t.duration, running: false, notifTimeout: null };
     return `<div class="timer-block ${t.cls}" id="block-${t.id}">
       <div class="timer-label">${t.sub}</div>
       <div class="timer-display" id="disp-${t.id}">${formatTime(t.duration)}</div>
-      <div class="timer-sub" id="sub-${t.id}">${t.label}</div>
+      <div class="timer-sub">${t.label}</div>
       <div class="timer-progress">
         <div class="timer-progress-fill" id="prog-${t.id}" style="width:100%"></div>
       </div>
       <div class="timer-btns">
-        <button class="timer-btn timer-btn-play" id="play-${t.id}" onclick="timerToggle('${t.id}',${t.duration})">▶ Play</button>
-        <button class="timer-btn timer-btn-reset" onclick="timerReset('${t.id}',${t.duration})">↺ Reset</button>
+        <button class="timer-btn timer-btn-play" id="play-${t.id}"
+          onclick="timerToggle('${t.id}',${t.duration},'${t.label}')">▶ Play</button>
+        <button class="timer-btn timer-btn-reset"
+          onclick="timerReset('${t.id}',${t.duration})">↺ Reset</button>
       </div>
     </div>`;
   }).join('');
+
+  c.innerHTML = notifBarHtml + wakeBarHtml + timersHtml;
 }
 
 function formatTime(secs) {
@@ -2510,60 +2702,84 @@ function formatTime(secs) {
   return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
-function timerToggle(id, total) {
+function timerToggle(id, total, label) {
   const state = timerState[id];
   const playBtn = document.getElementById('play-'+id);
   const disp = document.getElementById('disp-'+id);
 
   if (state.running) {
-    // Pause
+    // Pause — clear interval and cancel scheduled notification
     clearInterval(state.interval);
     state.running = false;
     playBtn.textContent = '▶ Play';
     playBtn.classList.remove('playing');
     disp.classList.remove('running');
+    if (state.notifTimeout) { clearTimeout(state.notifTimeout); state.notifTimeout = null; }
   } else {
     if (state.remaining <= 0) timerReset(id, total);
+
+    // Record start time for drift correction
+    state.startTime = Date.now();
+    state.startRemaining = state.remaining;
     state.running = true;
     playBtn.textContent = '⏸ Pause';
     playBtn.classList.add('playing');
     disp.classList.add('running');
     disp.classList.remove('finished');
 
-    state.interval = setInterval(() => {
-      state.remaining--;
-      const pct = (state.remaining / total) * 100;
-      document.getElementById('disp-'+id).textContent = formatTime(state.remaining);
-      document.getElementById('prog-'+id).style.width = pct + '%';
+    // Schedule notification for when timer should end
+    if (notifPermission === 'granted') {
+      if (state.notifTimeout) clearTimeout(state.notifTimeout);
+      state.notifTimeout = setTimeout(() => {
+        try {
+          new Notification('OgeMaxx — ' + label, {
+            body: 'Timer done! Next set.',
+            tag: 'ogemaxx-' + id,
+            renotify: true,
+          });
+        } catch(e) {}
+      }, state.remaining * 1000);
+    }
 
-      if (state.remaining <= 0) {
+    // Use drift-corrected tick
+    function tick() {
+      if (!state.running) return;
+      const elapsed = (Date.now() - state.startTime) / 1000;
+      const remaining = Math.max(0, Math.round(state.startRemaining - elapsed));
+      state.remaining = remaining;
+
+      const pct = (remaining / total) * 100;
+      const dispEl = document.getElementById('disp-'+id);
+      const progEl = document.getElementById('prog-'+id);
+      if (dispEl) dispEl.textContent = formatTime(remaining);
+      if (progEl) progEl.style.width = pct + '%';
+
+      if (remaining <= 0) {
         clearInterval(state.interval);
         state.running = false;
         state.remaining = 0;
-        playBtn.textContent = '▶ Play';
-        playBtn.classList.remove('playing');
-        disp.classList.remove('running');
-        disp.classList.add('finished');
-        disp.textContent = 'DONE';
-        // vibrate if available
+        if (playBtn) { playBtn.textContent = '▶ Play'; playBtn.classList.remove('playing'); }
+        if (dispEl) { dispEl.classList.remove('running'); dispEl.classList.add('finished'); dispEl.textContent = 'DONE'; }
         if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
       }
-    }, 1000);
+    }
+
+    state.interval = setInterval(tick, 500); // 500ms ticks for better accuracy
   }
 }
 
 function timerReset(id, total) {
   const state = timerState[id];
   clearInterval(state.interval);
+  if (state.notifTimeout) { clearTimeout(state.notifTimeout); state.notifTimeout = null; }
   state.running = false;
   state.remaining = total;
   const playBtn = document.getElementById('play-'+id);
   const disp = document.getElementById('disp-'+id);
-  playBtn.textContent = '▶ Play';
-  playBtn.classList.remove('playing');
-  disp.classList.remove('running','finished');
-  disp.textContent = formatTime(total);
-  document.getElementById('prog-'+id).style.width = '100%';
+  if (playBtn) { playBtn.textContent = '▶ Play'; playBtn.classList.remove('playing'); }
+  if (disp) { disp.classList.remove('running','finished'); disp.textContent = formatTime(total); }
+  const prog = document.getElementById('prog-'+id);
+  if (prog) prog.style.width = '100%';
 }
 // ═══════════════════════════════════════════
 // CALENDAR
