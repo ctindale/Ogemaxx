@@ -7,6 +7,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="OgeMaxx">
 <meta name="theme-color" content="#111110">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111110'/><text y='.9em' font-size='80' x='10'>🏔</text></svg>">
 <title>OgeMaxxing — 70 Day Training</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap');
@@ -1139,6 +1141,204 @@ body {
 }
 .timer-toggle.on::after { transform: translateX(18px); }
 
+/* ══ FITNESS PAGE — STICKY SECTION HEADERS ══ */
+.fit-section { margin-bottom: 32px; }
+.fit-section-hdr {
+  position: sticky;
+  top: var(--top-h);
+  z-index: 50;
+  background: var(--bg);
+  padding: 10px 0 8px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--border2);
+}
+.fit-section-title {
+  font-family: var(--disp); font-size: 26px; letter-spacing: 1px;
+  color: var(--text); line-height: 1;
+}
+.fit-section-title span { color: var(--accent); }
+.fit-section-sub {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-dim); margin-bottom: 2px;
+}
+
+/* ══ GYM MODULE PILL SELECTOR ══ */
+.gym-module-selector {
+  display: flex; gap: 6px; margin-bottom: 16px;
+  overflow-x: auto; padding-bottom: 2px; scrollbar-width: none;
+}
+.gym-module-selector::-webkit-scrollbar { display: none; }
+.gym-pill {
+  flex-shrink: 0; padding: 8px 16px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; color: var(--text-dim);
+  cursor: pointer; transition: all 0.15s; user-select: none;
+  white-space: nowrap;
+}
+.gym-pill:active { opacity: 0.7; }
+.gym-pill.active.legs  { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+.gym-pill.active.push  { background: var(--accent);  border-color: var(--accent);  color: #fff; }
+.gym-pill.active.pull  { background: var(--accent3); border-color: var(--accent3); color: #fff; }
+.gym-pill.active.pushups { background: var(--gold); border-color: var(--gold); color: #fff; }
+.gym-pill.active.cal   { background: #8a5606; border-color: #8a5606; color: #fff; }
+.gym-pill.active.swim  { background: var(--accent4); border-color: var(--accent4); color: #fff; }
+.gym-pill.active.timer { background: #6a3a8a; border-color: #6a3a8a; color: #fff; }
+.gym-module-pane { display: none; }
+.gym-module-pane.active { display: block; }
+
+/* ══ PACKING PAGE ══ */
+.pack-hero {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px; margin-bottom: 20px;
+}
+.pack-hero-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.pack-hero-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim);
+}
+.pack-hero-count {
+  font-family: var(--disp); font-size: 32px; letter-spacing: 1px; color: var(--text);
+}
+.pack-hero-count span { font-size: 18px; color: var(--text-dim); font-family: var(--sans); font-weight: 300; }
+.pack-prog-bar {
+  height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+}
+.pack-prog-fill {
+  height: 100%; border-radius: 3px;
+  background: linear-gradient(to right, var(--accent3), var(--accent2));
+  transition: width 0.3s;
+}
+.pack-hero-sub {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim); margin-top: 6px;
+}
+
+.pack-actions {
+  display: flex; gap: 8px; margin-bottom: 20px;
+}
+.pack-clear-btn {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 14px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 1px; color: var(--text-dim); cursor: pointer;
+  transition: all 0.12s;
+}
+.pack-clear-btn:active { opacity: 0.7; }
+
+.pack-category { margin-bottom: 24px; }
+.pack-cat-hdr {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.pack-cat-title {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+}
+.pack-cat-add {
+  background: none; border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px;
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  cursor: pointer; transition: all 0.12s;
+}
+.pack-cat-add:active { border-color: var(--accent4); color: var(--accent4); }
+
+.pack-cat-items {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; overflow: hidden;
+}
+.pack-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 13px 14px; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: background 0.08s;
+  -webkit-tap-highlight-color: transparent; user-select: none;
+  min-height: 52px;
+}
+.pack-item:last-child { border-bottom: none; }
+.pack-item:active { background: var(--surface2); }
+.pack-item.checked { opacity: 0.5; }
+
+.pack-chk {
+  width: 24px; height: 24px; flex-shrink: 0;
+  border: 2px solid var(--border2); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.12s; pointer-events: none;
+}
+.pack-item.checked .pack-chk { background: var(--accent2); border-color: var(--accent2); }
+.pack-chk-tick { opacity: 0; color: #fff; font-size: 13px; font-weight: 700; }
+.pack-item.checked .pack-chk-tick { opacity: 1; }
+
+.pack-item-name {
+  flex: 1; font-size: 14px; color: var(--text); line-height: 1.3;
+}
+.pack-item.checked .pack-item-name { text-decoration: line-through; color: var(--text-dim); }
+
+.pack-item-del {
+  background: none; border: none; color: var(--text-dim);
+  font-size: 16px; cursor: pointer; padding: 2px 4px;
+  -webkit-tap-highlight-color: transparent; line-height: 1; flex-shrink: 0;
+  transition: color 0.12s;
+}
+.pack-item-del:active { color: var(--accent); }
+
+.pack-add-row {
+  display: flex; gap: 8px; margin-top: 8px;
+}
+.pack-add-input {
+  flex: 1; padding: 10px 12px;
+  font-family: var(--sans); font-size: 16px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text); outline: none;
+  -webkit-appearance: none;
+}
+.pack-add-input:focus { border-color: var(--accent4); }
+.pack-add-input::placeholder { color: var(--text-dim); font-size: 14px; }
+.pack-add-submit {
+  background: var(--accent4); color: #fff; border: none;
+  border-radius: 8px; padding: 10px 16px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  cursor: pointer; white-space: nowrap; transition: opacity 0.12s;
+}
+.pack-add-submit:active { opacity: 0.75; }
+
+/* home packing widget */
+.home-pack-widget {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px; margin-top: 16px;
+  cursor: pointer; transition: background 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-pack-widget:active { background: var(--surface2); }
+.home-pack-widget-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 8px;
+}
+.home-pack-widget-label {
+  font-family: var(--mono); font-size: 9px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase; color: var(--text-dim);
+}
+.home-pack-widget-count {
+  font-family: var(--disp); font-size: 22px; letter-spacing: 1px; color: var(--text);
+}
+.home-pack-widget-count span { font-size: 14px; color: var(--text-dim); font-family: var(--sans); }
+.home-pack-widget-bar {
+  height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-bottom: 6px;
+}
+.home-pack-widget-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(to right, var(--accent3), var(--accent2));
+  transition: width 0.3s;
+}
+.home-pack-widget-sub {
+  font-family: var(--mono); font-size: 10px; color: var(--text-dim);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.home-pack-widget-sub .arrow { color: var(--accent4); }
+
 </style>
 </head>
 <body>
@@ -1150,6 +1350,7 @@ body {
 </div>
 
 <!-- PAGES -->
+<!-- ═══ HOME PAGE ═══ -->
 <div class="page active" id="page-home">
   <div class="page-inner">
     <div class="page-hdr">
@@ -1163,6 +1364,19 @@ body {
       <div class="week-strip" id="weekStrip"></div>
     </div>
     <div id="weekDisplay"></div>
+
+    <!-- Packing widget — taps through to Packing tab -->
+    <div class="home-pack-widget" id="homePackWidget" onclick="showPage('pack',document.getElementById('bn-pack'),'Pack List')">
+      <div class="home-pack-widget-top">
+        <div class="home-pack-widget-label">Pack Readiness</div>
+        <div class="home-pack-widget-count" id="hpwCount">0 <span>/ 0</span></div>
+      </div>
+      <div class="home-pack-widget-bar"><div class="home-pack-widget-fill" id="hpwFill" style="width:0%"></div></div>
+      <div class="home-pack-widget-sub">
+        <span id="hpwSub">Tap to open packing list</span>
+        <span class="arrow">→</span>
+      </div>
+    </div>
 
     <!-- WEEKLY SCHEDULE GUIDE -->
     <div class="sched-guide">
@@ -1191,20 +1405,50 @@ body {
   </div>
 </div>
 
-<div class="page" id="page-gym">
+<!-- ═══ FITNESS PAGE ═══ -->
+<div class="page" id="page-fit">
   <div class="page-inner">
-    <div class="page-hdr">
-      <div class="page-eyebrow">Session Log</div>
-      <div class="page-title"><span>Gym</span></div>
-      <div class="page-sub">All gym sessions in one place. Legs 1 is Tuesday, Push Wednesday, Pull Thursday, Legs 2 Saturday.</div>
+
+    <!-- Single pill selector for all modules: Cal, Push-ups, Legs, Push, Pull, Swim, Timer -->
+    <div class="gym-module-selector">
+      <div class="gym-pill cal active"    id="gpill-cal"    onclick="switchGymModule('cal',this)">Cal</div>
+      <div class="gym-pill pushups"       id="gpill-pushups" onclick="switchGymModule('pushups',this)">Push-ups</div>
+      <div class="gym-pill legs"          id="gpill-legs"   onclick="switchGymModule('legs',this)">Legs</div>
+      <div class="gym-pill push"          id="gpill-push"   onclick="switchGymModule('push',this)">Push</div>
+      <div class="gym-pill pull"          id="gpill-pull"   onclick="switchGymModule('pull',this)">Pull</div>
+      <div class="gym-pill swim"          id="gpill-swim"   onclick="switchGymModule('swim',this)">Swim</div>
+      <div class="gym-pill timer"         id="gpill-timer"  onclick="switchGymModule('timer',this)">Timer</div>
     </div>
-    <div class="gym-tabs">
-      <div class="gym-tab legs active" onclick="switchGymTab('legs',this)">Legs</div>
-      <div class="gym-tab push" onclick="switchGymTab('push',this)">Push</div>
-      <div class="gym-tab pull" onclick="switchGymTab('pull',this)">Pull</div>
-      <div class="gym-tab pushups" onclick="switchGymTab('pushups',this)">Push-ups</div>
+
+    <!-- CALENDAR pane -->
+    <div class="gym-module-pane active" id="gmod-cal">
+      <div class="cal-legend">
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#b03a1e"></div><span>Phase 1</span></div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#c47d10"></div><span>Phase 2</span></div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#3a7a30"></div><span>Phase 3</span></div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#1a5a8a"></div><span>Phase 4</span></div>
+        <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#222220;border:1px solid #555"></div><span>Blocked</span></div>
+      </div>
+      <div class="cal-dow-header">
+        <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-note">Days blocked: <span id="blockedCount">0</span></div>
+      <div class="notes-section">
+        <div class="notes-header">
+          <div class="notes-title">Notes & Commitments</div>
+          <button class="notes-add-btn" onclick="addNote()">+ Add</button>
+        </div>
+        <div class="notes-sub">Log events, commitments, travel days — anything that affects your schedule.</div>
+        <div id="notesList" class="notes-list"></div>
+      </div>
     </div>
-    <div class="gym-pane active" id="gym-pane-legs">
+
+    <!-- PUSH-UPS pane -->
+    <div class="gym-module-pane" id="gmod-pushups"><div id="pushups-content"></div></div>
+
+    <!-- LEGS pane -->
+    <div class="gym-module-pane" id="gmod-legs">
       <div class="legs-sub-tabs">
         <div class="legs-stab active" onclick="switchLegsTab('legs1',this)">Legs 1 — Tuesday</div>
         <div class="legs-stab" onclick="switchLegsTab('legs2',this)">Legs 2 — Saturday</div>
@@ -1212,94 +1456,68 @@ body {
       <div class="legs-sub-pane active" id="legs-sub-legs1"><div id="legs-content"></div></div>
       <div class="legs-sub-pane" id="legs-sub-legs2"><div id="legs2-content"></div></div>
     </div>
-    <div class="gym-pane" id="gym-pane-push"><div id="push-content"></div></div>
-    <div class="gym-pane" id="gym-pane-pull"><div id="pull-content"></div></div>
-    <div class="gym-pane" id="gym-pane-pushups"><div id="pushups-content"></div></div>
-  </div>
-</div>
 
-<div class="page" id="page-swim">
-  <div class="page-inner">
-    <div class="page-hdr">
-      <div class="page-eyebrow">Session Log</div>
-      <div class="page-title"><span>Swim</span></div>
-      <div class="page-sub">2 sessions per week — Session A (Monday technique) and Session B (Friday endurance). Tap a phase to view.</div>
-    </div>
-    <!-- Phase tabs -->
-    <div class="swim-phase-tabs">
-      <div class="swim-ptab active" onclick="switchSwimPhase('p1',this)">Phase 1</div>
-      <div class="swim-ptab" onclick="switchSwimPhase('p2',this)">Phase 2</div>
-      <div class="swim-ptab" onclick="switchSwimPhase('p3',this)">Phase 3</div>
-      <div class="swim-ptab" onclick="switchSwimPhase('p4',this)">Phase 4</div>
-    </div>
-    <div id="swim-content"></div>
-  </div>
-</div>
+    <!-- PUSH pane -->
+    <div class="gym-module-pane" id="gmod-push"><div id="push-content"></div></div>
 
-<div class="page" id="page-cal">
-  <div class="page-inner">
-    <div class="page-hdr">
-      <div class="page-eyebrow">70-Day Program</div>
-      <div class="page-title"><span>Calendar</span></div>
-      <div class="page-sub">Mon 23 Mar → Sun 31 May 2026. Tap any day to block it. Jun 1–2 are your pack &amp; admin days before departure.</div>
-    </div>
-    <div class="cal-legend">
-      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#b03a1e"></div><span>Phase 1</span></div>
-      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#c47d10"></div><span>Phase 2</span></div>
-      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#3a7a30"></div><span>Phase 3</span></div>
-      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#1a5a8a"></div><span>Phase 4</span></div>
-      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#222220;border:1px solid #555"></div><span>Blocked</span></div>
-    </div>
-    <div class="cal-dow-header">
-      <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
-    </div>
-    <div class="cal-grid" id="calGrid"></div>
-    <div class="cal-note">Days blocked: <span id="blockedCount">0</span></div>
+    <!-- PULL pane -->
+    <div class="gym-module-pane" id="gmod-pull"><div id="pull-content"></div></div>
 
-    <!-- NOTES SECTION -->
-    <div class="notes-section">
-      <div class="notes-header">
-        <div class="notes-title">Notes & Commitments</div>
-        <button class="notes-add-btn" onclick="addNote()">+ Add</button>
+    <!-- SWIM pane -->
+    <div class="gym-module-pane" id="gmod-swim">
+      <div class="swim-phase-tabs">
+        <div class="swim-ptab active" onclick="switchSwimPhase('p1',this)">Phase 1</div>
+        <div class="swim-ptab" onclick="switchSwimPhase('p2',this)">Phase 2</div>
+        <div class="swim-ptab" onclick="switchSwimPhase('p3',this)">Phase 3</div>
+        <div class="swim-ptab" onclick="switchSwimPhase('p4',this)">Phase 4</div>
       </div>
-      <div class="notes-sub">Log events, commitments, travel days — anything that affects your schedule.</div>
-      <div id="notesList" class="notes-list"></div>
+      <div id="swim-content"></div>
     </div>
+
+    <!-- TIMER pane -->
+    <div class="gym-module-pane" id="gmod-timer"><div id="timer-content"></div></div>
+
   </div>
 </div>
 
-<div class="page" id="page-timer">
+<!-- ═══ PACKING PAGE ═══ -->
+<div class="page" id="page-pack">
   <div class="page-inner">
     <div class="page-hdr">
-      <div class="page-eyebrow">Pre-Session</div>
-      <div class="page-title"><span>Timers</span></div>
-      <div class="page-sub">Warm-up and rest timers. Tap Play to start, Reset to clear.</div>
+      <div class="page-eyebrow">Trip Preparation</div>
+      <div class="page-title"><span>Pack</span> List</div>
+      <div class="page-sub">Central Asia + Balkans. 45L pack ~12kg. Tick items as you pack them.</div>
     </div>
-    <div id="timer-content"></div>
+    <!-- Progress hero -->
+    <div class="pack-hero">
+      <div class="pack-hero-top">
+        <div class="pack-hero-label">Pack Readiness</div>
+        <div class="pack-hero-count" id="packCount">0 <span>/ 0</span></div>
+      </div>
+      <div class="pack-prog-bar"><div class="pack-prog-fill" id="packProgFill" style="width:0%"></div></div>
+      <div class="pack-hero-sub" id="packProgSub">Start ticking items as you pack them</div>
+    </div>
+    <div class="pack-actions">
+      <button class="pack-clear-btn" onclick="packClearDone()">Clear completed</button>
+    </div>
+    <!-- Categories rendered by JS -->
+    <div id="packList"></div>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- ═══ 3-TAB BOTTOM NAV ═══ -->
 <nav class="bottom-nav">
-  <div class="bn-tab active" id="bn-home" onclick="showPage('home',this,'Weekly Tracker')">
+  <div class="bn-tab active" id="bn-home" onclick="showPage('home',this,'OgeMaxx')">
     <div class="bn-icon">⌂</div>
     <div class="bn-label">Home</div>
   </div>
-  <div class="bn-tab" id="bn-cal" onclick="showPage('cal',this,'Calendar')">
-    <div class="bn-icon">▦</div>
-    <div class="bn-label">Cal</div>
-  </div>
-  <div class="bn-tab" id="bn-gym" onclick="showPage('gym',this,'Gym')">
+  <div class="bn-tab" id="bn-fit" onclick="showPage('fit',this,'Fitness')">
     <div class="bn-icon">◈</div>
-    <div class="bn-label">Gym</div>
+    <div class="bn-label">Fitness</div>
   </div>
-  <div class="bn-tab" id="bn-swim" onclick="showPage('swim',this,'Swim')">
-    <div class="bn-icon">〜</div>
-    <div class="bn-label">Swim</div>
-  </div>
-  <div class="bn-tab" id="bn-timer" onclick="showPage('timer',this,'Timers')">
-    <div class="bn-icon">◷</div>
-    <div class="bn-label">Timer</div>
+  <div class="bn-tab" id="bn-pack" onclick="showPage('pack',this,'Pack List')">
+    <div class="bn-icon">🎒</div>
+    <div class="bn-label">Pack</div>
   </div>
 </nav>
 
@@ -2745,23 +2963,39 @@ function updateBlockedCount() {
 // ═══════════════════════════════════════════
 // NAV
 // ═══════════════════════════════════════════
+// ── Tab routing: 3-tab architecture ──
 function showPage(id, el, title) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.bn-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById(`page-${id}`).classList.add('active');
-  el.classList.add('active');
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
+  if (el) el.classList.add('active');
   document.getElementById('topTitle').textContent = title;
   window.scrollTo(0, 0);
+  // Refresh packing widget whenever home is shown
+  if (id === 'home') updateHomePackWidget();
 }
 
-function switchGymTab(tab, el) {
-  document.querySelectorAll('.gym-tab').forEach(t => t.classList.remove('active'));
+// ── Gym module pill selector — persists last-viewed module to localStorage ──
+function switchGymModule(mod, el) {
+  document.querySelectorAll('.gym-pill').forEach(p => p.classList.remove('active'));
   el.classList.add('active');
-  document.querySelectorAll('.gym-pane').forEach(p => p.classList.remove('active'));
-  const pane = document.getElementById(`gym-pane-${tab}`);
+  document.querySelectorAll('.gym-module-pane').forEach(p => p.classList.remove('active'));
+  const pane = document.getElementById('gmod-' + mod);
   if (pane) pane.classList.add('active');
-  window.scrollTo(0, 0);
+  // Persist last-viewed module
+  ls('ogemaxx_last_gym_module', mod);
 }
+
+// ── Restore last-used gym module on load ──
+function restoreGymModule() {
+  const last = ls('ogemaxx_last_gym_module') || 'cal';
+  const pill = document.getElementById('gpill-' + last);
+  if (pill) switchGymModule(last, pill);
+}
+
+// Legacy compat — old gym tab references
+function switchGymTab(tab, el) { switchGymModule(tab, el); }
 
 // ═══════════════════════════════════════════
 // NOTES
@@ -3048,6 +3282,321 @@ function puInitDrag() {
   document.addEventListener('touchend', onEnd);
 }
 
+
+// ═══════════════════════════════════════════
+// PACKING LIST
+// ═══════════════════════════════════════════
+
+// Default packing categories and items for Central Asia + Balkans multi-day trek
+const PACK_DEFAULTS = [
+  { cat: 'Footwear', items: [
+    'Trail running shoes / hiking boots (broken in)',
+    'Camp sandals / flip flops',
+    'Wool hiking socks ×3',
+    'Liner socks ×2',
+    'Gaiters (for loose terrain)',
+  ]},
+  { cat: 'Clothing — Base Layer', items: [
+    'Merino wool t-shirt ×2',
+    'Merino long-sleeve top ×1',
+    'Merino boxers/briefs ×3',
+    'Thermal bottoms (for camp)',
+  ]},
+  { cat: 'Clothing — Mid & Outer Layer', items: [
+    'Fleece or softshell jacket',
+    'Waterproof rain jacket',
+    'Waterproof rain trousers',
+    'Insulated jacket (puffy)',
+    'Lightweight hiking trousers ×2',
+    'Shorts ×1',
+    'Sun hat / cap',
+    'Warm beanie',
+    'Lightweight gloves',
+  ]},
+  { cat: 'Shelter & Sleep', items: [
+    'Two-person tent (shared with teammate)',
+    'Sleeping bag (rated to -5°C)',
+    'Sleeping mat / pad',
+    'Tent repair kit',
+  ]},
+  { cat: 'Pack & Carry', items: [
+    '45L pack with hip belt',
+    'Pack rain cover',
+    'Dry bags / stuff sacks',
+    'Trekking poles',
+    'Pack liner (bin bag)',
+  ]},
+  { cat: 'Navigation & Safety', items: [
+    'Maps.me offline maps downloaded',
+    'Compass',
+    'Satellite communicator or personal locator beacon',
+    'Head torch + spare batteries',
+    'Emergency whistle',
+    'Lightweight emergency bivvy',
+  ]},
+  { cat: 'Water & Food', items: [
+    'Water filter (Sawyer Squeeze or similar)',
+    'Water reservoir / bladder 2L',
+    'Hard water bottle 1L backup',
+    'Water purification tablets',
+    'Camp stove + fuel canister (shared)',
+    'Cooking pot (shared)',
+    'Spork / eating utensils',
+    'Lighter + waterproof matches',
+    'Trail snacks: nuts, bars, jerky',
+    'Dehydrated meals ×2 per day camping',
+  ]},
+  { cat: 'Health & First Aid', items: [
+    'Personal first aid kit',
+    'Blister kit (Compeed, needle, antiseptic)',
+    'Ibuprofen + paracetamol',
+    'Altitude sickness tablets (if needed)',
+    'Rehydration sachets',
+    'Antihistamines',
+    'Sun cream SPF 50+',
+    'Lip balm with SPF',
+    'Insect repellent (DEET 30%+)',
+    'Hand sanitiser',
+    'Prescription medications',
+    'KT tape / sports strapping',
+  ]},
+  { cat: 'Hygiene & Toiletries', items: [
+    'Toothbrush + toothpaste',
+    'Biodegradable soap / body wash',
+    'Microfibre towel',
+    'Toilet paper + trowel',
+    'Wet wipes',
+    'Menstrual / personal hygiene items',
+    'Deodorant',
+  ]},
+  { cat: 'Electronics', items: [
+    'Phone + charger cable',
+    'Power bank (20,000 mAh)',
+    'Universal travel adapter',
+    'Camera (optional)',
+    'Headphones',
+    'Spare memory cards / cables',
+  ]},
+  { cat: 'Documents & Finance', items: [
+    'Passport (valid 6+ months)',
+    'Visa documents printed',
+    'Travel insurance documents',
+    'Emergency contact card',
+    'Cash in local currencies (USD as backup)',
+    'Card with low FX fees',
+    'Digital copies of all documents (cloud)',
+    'Accommodation bookings saved offline',
+  ]},
+  { cat: 'Shared Group Gear (4 people)', items: [
+    'Group first aid kit top-up',
+    'Rope / cord 10m',
+    'Multi-tool / knife',
+    'Duct tape',
+    'Cable ties',
+    'Group snack stash',
+    'Water filter (backup)',
+  ]},
+  { cat: 'Miscellaneous', items: [
+    'Sunglasses (polarised)',
+    'Watch / GPS watch',
+    'Buff / neck gaiter',
+    'Small notebook + pen',
+    'Ear plugs (hostel nights)',
+    'Padlock (for hostel lockers)',
+    'Laundry bag',
+  ]},
+];
+
+function packKey(catIdx, itemIdx) { return 'ogemaxx_pack_' + catIdx + '_' + itemIdx; }
+function packChecked(catIdx, itemIdx) { return ls(packKey(catIdx, itemIdx)) === '1'; }
+function packSetChecked(catIdx, itemIdx, val) { ls(packKey(catIdx, itemIdx), val ? '1' : '0'); }
+
+function packGetCustom(catIdx) {
+  try { return JSON.parse(ls('ogemaxx_pack_custom_' + catIdx) || '[]'); } catch(e) { return []; }
+}
+function packSaveCustom(catIdx, items) { ls('ogemaxx_pack_custom_' + catIdx, JSON.stringify(items)); }
+
+function packGetCustomChecked(catIdx, itemId) { return ls('ogemaxx_pack_cc_' + catIdx + '_' + itemId) === '1'; }
+function packSetCustomChecked(catIdx, itemId, val) { ls('ogemaxx_pack_cc_' + catIdx + '_' + itemId, val ? '1' : '0'); }
+
+function packCounts() {
+  let total = 0, done = 0;
+  PACK_DEFAULTS.forEach((cat, ci) => {
+    let deletedDefaults = [];
+    try { deletedDefaults = JSON.parse(ls('ogemaxx_pack_del_' + ci) || '[]'); } catch(e) {}
+    cat.items.forEach((_, ii) => {
+      if (deletedDefaults.includes(ii)) return; // exclude deleted
+      total++; if (packChecked(ci, ii)) done++;
+    });
+    packGetCustom(ci).forEach(item => {
+      total++; if (packGetCustomChecked(ci, item.id)) done++;
+    });
+  });
+  return { total, done };
+}
+
+// Track edit mode per category
+const packEditMode = {};
+
+function buildPackList() {
+  const container = document.getElementById('packList');
+  if (!container) return;
+
+  container.innerHTML = PACK_DEFAULTS.map((cat, ci) => {
+    const customItems = packGetCustom(ci);
+    const editing = !!packEditMode[ci];
+
+    // Load deleted default indices for this category
+    let deletedDefaults = [];
+    try { deletedDefaults = JSON.parse(ls('ogemaxx_pack_del_' + ci) || '[]'); } catch(e) {}
+
+    const defaultRows = cat.items.map((item, ii) => {
+      if (deletedDefaults.includes(ii)) return ''; // skip deleted defaults
+      const checked = packChecked(ci, ii);
+      const delBtn = editing
+        ? '<button class="pack-item-del" onclick="event.stopPropagation();packDeleteDefault(' + ci + ',' + ii + ')">✕</button>'
+        : '';
+      return '<div class="pack-item' + (checked ? ' checked' : '') + '"' +
+        (!editing ? ' onclick="packToggle(' + ci + ',' + ii + ',null,this)"' : '') + '>' +
+        '<div class="pack-chk"><div class="pack-chk-tick">✓</div></div>' +
+        '<div class="pack-item-name">' + item + '</div>' +
+        delBtn +
+        '</div>';
+    }).join('');
+
+    const customRows = customItems.map(item => {
+      const checked = packGetCustomChecked(ci, item.id);
+      const delBtn = editing
+        ? '<button class="pack-item-del" onclick="event.stopPropagation();packDeleteCustom(' + ci + ',' + item.id + ')">✕</button>'
+        : '';
+      return '<div class="pack-item' + (checked ? ' checked' : '') + '"' +
+        (!editing ? ' onclick="packToggleCustom(' + ci + ',' + item.id + ',this)"' : '') +
+        ' id="pci-' + ci + '-' + item.id + '">' +
+        '<div class="pack-chk"><div class="pack-chk-tick">✓</div></div>' +
+        '<div class="pack-item-name">' + item.name + '</div>' +
+        delBtn +
+        '</div>';
+    }).join('');
+
+    const editBtnLabel = editing ? 'Done' : 'Edit Items';
+    const editBtnStyle = editing ? 'border-color:var(--accent2);color:var(--accent2);' : '';
+    const addRow = editing
+      ? '<div class="pack-add-row" id="pack-add-' + ci + '">' +
+          '<input class="pack-add-input" type="text" inputmode="text" placeholder="New item..." id="pack-input-' + ci + '" onkeydown="if(event.key===\'Enter\')packAddItem(' + ci + ')">' +
+          '<button class="pack-add-submit" onclick="packAddItem(' + ci + ')">Add</button>' +
+        '</div>'
+      : '';
+
+    return '<div class="pack-category" id="pack-cat-' + ci + '">' +
+      '<div class="pack-cat-hdr">' +
+        '<div class="pack-cat-title">' + cat.cat + '</div>' +
+        '<button class="pack-cat-add" style="' + editBtnStyle + '" onclick="packToggleEdit(' + ci + ')">' + editBtnLabel + '</button>' +
+      '</div>' +
+      '<div class="pack-cat-items">' + defaultRows + customRows + '</div>' +
+      addRow +
+    '</div>';
+  }).join('');
+
+  updatePackProgress();
+}
+
+function packToggleEdit(ci) {
+  packEditMode[ci] = !packEditMode[ci];
+  buildPackList();
+  if (packEditMode[ci]) {
+    setTimeout(() => {
+      const input = document.getElementById('pack-input-' + ci);
+      if (input) input.focus();
+    }, 50);
+  }
+}
+
+function packDeleteDefault(ci, ii) {
+  // Mark a default item as deleted by storing its index in a deleted-set
+  const key = 'ogemaxx_pack_del_' + ci;
+  let deleted = [];
+  try { deleted = JSON.parse(ls(key) || '[]'); } catch(e) {}
+  if (!deleted.includes(ii)) deleted.push(ii);
+  ls(key, JSON.stringify(deleted));
+  buildPackList();
+  updatePackProgress();
+  updateHomePackWidget();
+}
+
+function packToggle(ci, ii, customId, el) {
+  const checked = !el.classList.contains('checked');
+  el.classList.toggle('checked', checked);
+  if (customId === null) {
+    packSetChecked(ci, ii, checked);
+  }
+  updatePackProgress();
+  updateHomePackWidget();
+}
+
+function packToggleCustom(ci, itemId, el) {
+  const checked = !el.classList.contains('checked');
+  el.classList.toggle('checked', checked);
+  packSetCustomChecked(ci, itemId, checked);
+  updatePackProgress();
+  updateHomePackWidget();
+}
+
+
+
+function packAddItem(ci) {
+  const input = document.getElementById('pack-input-' + ci);
+  if (!input || !input.value.trim()) return;
+  const custom = packGetCustom(ci);
+  const newItem = { id: Date.now(), name: input.value.trim() };
+  custom.push(newItem);
+  packSaveCustom(ci, custom);
+  input.value = '';
+  buildPackList();
+}
+
+function packDeleteCustom(ci, itemId) {
+  const custom = packGetCustom(ci).filter(i => i.id !== itemId);
+  packSaveCustom(ci, custom);
+  buildPackList();
+}
+
+function packClearDone() {
+  // Uncheck all default items
+  PACK_DEFAULTS.forEach((cat, ci) => {
+    cat.items.forEach((_, ii) => {
+      if (packChecked(ci, ii)) packSetChecked(ci, ii, false);
+    });
+    // Uncheck custom items
+    packGetCustom(ci).forEach(item => {
+      if (packGetCustomChecked(ci, item.id)) packSetCustomChecked(ci, item.id, false);
+    });
+  });
+  buildPackList();
+  updateHomePackWidget();
+}
+
+function updatePackProgress() {
+  const { total, done } = packCounts();
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  const countEl = document.getElementById('packCount');
+  const fillEl = document.getElementById('packProgFill');
+  const subEl = document.getElementById('packProgSub');
+  if (countEl) countEl.innerHTML = done + ' <span>/ ' + total + '</span>';
+  if (fillEl) fillEl.style.width = pct + '%';
+  if (subEl) subEl.textContent = pct >= 100 ? 'All packed — ready to go! 🏔' : pct > 0 ? pct + '% packed' : 'Start ticking items as you pack them';
+}
+
+function updateHomePackWidget() {
+  const { total, done } = packCounts();
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+  const countEl = document.getElementById('hpwCount');
+  const fillEl = document.getElementById('hpwFill');
+  const subEl = document.getElementById('hpwSub');
+  if (countEl) countEl.innerHTML = done + ' <span>/ ' + total + '</span>';
+  if (fillEl) fillEl.style.width = pct + '%';
+  if (subEl) subEl.textContent = pct >= 100 ? 'All packed — ready! Tap to review' : pct > 0 ? pct + '% packed · Tap to continue' : 'Tap to open packing list';
+}
+
 // ═══════════════════════════════════════════
 // INIT — must be last, after all functions declared
 // ═══════════════════════════════════════════
@@ -3061,6 +3610,9 @@ buildCalendar();
 renderNotes();
 buildTimerPage();
 buildPushups();
+buildPackList();
+restoreGymModule();
+updateHomePackWidget();
 </script>
 </body>
 </html>
